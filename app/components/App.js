@@ -50,7 +50,12 @@ export default class App extends Component<{}, State> {
     } = this.state;
 
     return (
-      <div id="app">
+      <div id="app" className="main">
+        <div className="page-tab">
+          <span className={page === 'User' ? 'selected' : ''}>User</span>
+          <span className={page === 'Privacy' ? 'selected' : ''}>Privacy</span>
+          <span className={page === 'Done' ? 'selected' : ''}>Done</span>
+        </div>
         {
           page === 'User'
           && <User data={user} isValidated={validated.includes('User')} />
