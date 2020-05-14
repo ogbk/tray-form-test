@@ -1,138 +1,67 @@
 // @flow
 
 import React, { Component } from 'react';
-import Preview from './Preview';
-// import { basicSortObjects } from '../utils/sortBasic';
-import { sortObjects } from '../utils/sortAlphaNum';
+import User from './User';
+import Privacy from './Privacy';
+import Done from './Done';
 
-export type Fields = {
-  id: string,
-  field1: string,
-  field2: string
+export type UserType = {
+  name: string,
+  role: string,
+  email: string,
+  password: string,
 };
 
-type Props = {
-  fields: Array<'id' | 'field1' | 'field2'>,
-  defaultData: Array<Fields>,
-  defaultSortKey: string,
-  defaultSortAsc: boolean
+export type PrivacyType = {
+  updates: {updateInfo: string, updateAgree: boolean },
+  products: {productsInfo: string, productsAgree: boolean },
 };
+
+export type DoneType = {
+  message: string;
+};
+
+type Page = 'User' | 'Privacy' | 'Done';
 
 type State = {
-  sortKey: string,
-  sortAsc: boolean,
-  data: Array<Fields>,
-  previewOn: boolean,
-  selectedRow: Fields,
-  symbolAsc: {
-    true: string,
-    false: string
-  },
+  page: Page,
+  validated: Array<Page>,
+  user: UserType,
+  privacy: PrivacyType,
+  done: DoneType,
 };
 
-export default class App extends Component<Props, State> {
-  state:State = (() => {
-    const { defaultSortKey, defaultSortAsc, defaultData } = this.props;
-    return {
-      sortKey: defaultSortKey,
-      sortAsc: defaultSortAsc,
-      data: sortObjects(defaultData, defaultSortKey, defaultSortAsc),
-      symbolAsc: {
-        true: '\u25B2',
-        false: '\u25BC',
-      },
-      previewOn: false,
-      selectedRow: {},
-    };
-  })();
-
-
-  sortByColumn = (newSortKey: string): void => {
-    const { defaultSortAsc, defaultData } = this.props;
-    const {
-      sortKey: currentSortKey,
-      sortAsc: currentSortAsc,
-      data: currentData,
-    } = this.state;
-
-    if (currentSortKey === newSortKey) {
-      this.setState({
-        sortAsc: !currentSortAsc,
-        data: currentData.reverse(),
-      });
-    } else {
-      this.setState({
-        sortAsc: defaultSortAsc,
-        sortKey: newSortKey,
-        data: sortObjects(defaultData, newSortKey, defaultSortAsc),
-      });
-    }
-  }
-
-  showPreview = (row: Fields): void => {
-    this.setState({
-      previewOn: true,
-      selectedRow: row,
-    });
-  }
+export default class App extends Component<{}, State> {
+  state:State = {
+    page: 'User',
+    validated: [],
+    user: {},
+    privacy: {},
+    done: {},
+  };
 
   render() {
-    const { fields: columns } = this.props;
     const {
-      sortKey,
-      sortAsc,
-      data,
-      symbolAsc,
-      previewOn,
-      selectedRow,
+      page,
+      validated,
+      user,
+      privacy,
+      done,
     } = this.state;
 
     return (
       <div id="app">
-        <table>
-          <caption> list </caption>
-          <thead>
-            <tr>
-              {
-                columns.map((columnName) => (
-                  <th
-                    key={`th_${columnName}`}
-                    className={columnName === sortKey ? 'click selected-sort-bar' : 'click'}
-                    onClick={() => { this.sortByColumn(columnName); }}
-                  >
-                    {columnName}
-                    {columnName === sortKey ? symbolAsc[String(sortAsc)] : ' '}
-                  </th>
-                ))
-              }
-            </tr>
-          </thead>
-          <tbody>
-            {
-              data.map((row) => {
-                const { id: rowId } = row;
-                return (
-                  <tr
-                    key={`row_${rowId}`}
-                    className={rowId === selectedRow.id ? 'click clicked-row' : 'click'}
-                    onClick={() => { this.showPreview(row); }}
-                  >
-                    {
-                      columns.map((columnName) => (
-                        <td key={`field_${columnName}`}>
-                          {row[columnName]}
-                        </td>
-                      ))
-                    }
-                  </tr>
-                );
-              })
-            }
-          </tbody>
-        </table>
         {
-          previewOn
-          && <Preview rowData={selectedRow} />
+          page === 'User'
+          && <User data={user} isValidated={validated.includes('User')} />
+        }
+        {
+          page === 'Privacy'
+          && <Privacy data={privacy} isValidated={validated.includes('Privacy')} />
+        }
+        {
+          page === 'Done'
+          && <Done data={done} />
         }
       </div>
     );
