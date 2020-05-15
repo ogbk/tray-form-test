@@ -25,7 +25,7 @@ type Page = 'User' | 'Privacy' | 'Done';
 
 type State = {
   page: Page,
-  validated: Array<Page>,
+  validatedPages: Array<Page>,
   user: UserType,
   privacy: PrivacyType,
   done: DoneType,
@@ -34,7 +34,7 @@ type State = {
 export default class App extends Component<{}, State> {
   state:State = {
     page: 'User',
-    validated: [],
+    validatedPages: [],
     user: {},
     privacy: {},
     done: {},
@@ -43,7 +43,7 @@ export default class App extends Component<{}, State> {
   render() {
     const {
       page,
-      validated,
+      validatedPages,
       user,
       privacy,
       done,
@@ -58,11 +58,11 @@ export default class App extends Component<{}, State> {
         </div>
         {
           page === 'User'
-          && <User data={user} isValidated={validated.includes('User')} />
+          && <User data={user} isValidated={validatedPages.includes('User')} />
         }
         {
           page === 'Privacy'
-          && <Privacy data={privacy} isValidated={validated.includes('Privacy')} />
+          && <Privacy data={privacy} isValidated={validatedPages.includes('Privacy')} />
         }
         {
           page === 'Done'
