@@ -21,53 +21,57 @@ export type DoneType = {
   message: string;
 };
 
-type Page = 'User' | 'Privacy' | 'Done';
+type PageType = 'User' | 'Privacy' | 'Done';
 
 type State = {
-  page: Page,
-  validatedPages: Array<Page>,
-  user: UserType,
-  privacy: PrivacyType,
-  done: DoneType,
+  currentPage: PageType,
+  validatedPages: Array<PageType>,
+  pages: {
+    User: {component: any, data: UserType},
+    Privacy: {component: any, data: PrivacyType},
+    Done: {component: any, data: DoneType},
+  },
 };
 
 export default class App extends Component<{}, State> {
   state:State = {
-    page: 'User',
+    currentPage: 'User',
     validatedPages: [],
-    user: {},
-    privacy: {},
-    done: {},
+    pages: {
+      User: { component: User, data: {} },
+      Privacy: { component: Privacy, data: {} },
+      Done: { component: Done, data: {} },
+    },
   };
 
   render() {
     const {
-      page,
+      currentPage,
       validatedPages,
-      user,
-      privacy,
-      done,
+      pages,
     } = this.state;
+
+    const allPagesKeys: Array<PageType> = Object.keys(pages);
+    const RenderCmp = pages[currentPage].component;
 
     return (
       <div id="app" className="main">
         <div className="page-tab">
-          <span className={page === 'User' ? 'selected' : ''}>User</span>
-          <span className={page === 'Privacy' ? 'selected' : ''}>Privacy</span>
-          <span className={page === 'Done' ? 'selected' : ''}>Done</span>
+          {
+            allPagesKeys.map((PageComponent, idx) => {
+              let className = '';
+              if (currentPage === PageComponent) { className += 'selected '; }
+              if (validatedPages.includes(PageComponent)) { className += 'validated '; }
+
+              return (
+                <span className={className} key={`${PageComponent}-${idx}`}>{ PageComponent }</span>
+              );
+            })
+          }
         </div>
-        {
-          page === 'User'
-          && <User data={user} isValidated={validatedPages.includes('User')} />
-        }
-        {
-          page === 'Privacy'
-          && <Privacy data={privacy} isValidated={validatedPages.includes('Privacy')} />
-        }
-        {
-          page === 'Done'
-          && <Done data={done} />
-        }
+
+        <RenderCmp data={pages[currentPage].data} />
+
       </div>
     );
   }
