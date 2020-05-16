@@ -1,24 +1,48 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 import type { PrivacyType } from './App';
 
-const Privacy = ({
-  data: {
-    updates: { updateInfo, updateAgree },
-    products: { productsInfo, productsAgree },
-  },
-}: {data: PrivacyType}) => (
-  <div>
-    <h3>
-      {updateInfo}
-      {updateAgree}
-    </h3>
-    <h3>
-      {productsInfo}
-      {productsAgree}
-    </h3>
-  </div>
-);
+type Props = {
+  submitPage: (PrivacyType) => void,
+};
 
-export default Privacy;
+export default class User extends Component<Props, PrivacyType> {
+  state:PrivacyType = {
+    updates: false,
+    products: false,
+  };
+
+  handleInputChange = ({ target: { name, checked } }: any): void => {
+    this.setState({
+      [name]: checked,
+    });
+  };
+
+  handleSubmit = (evt: any) => {
+    evt.preventDefault();
+
+    const { state } = this;
+    const { submitPage } = this.props;
+    submitPage(state);
+  }
+
+  render() {
+    const { updates, products } = this.state;
+
+    return (
+      <form className="form" onSubmit={this.handleSubmit}>
+        <div>
+          <input type="checkbox" name="updates" value={updates} onChange={this.handleInputChange} />
+          <span>Receive updates about Tray.io product by email </span>
+        </div>
+
+        <div>
+          <input type="checkbox" name="products" value={products} onChange={this.handleInputChange} />
+          <span>Receive communication by email for other products created by the Tray.io team</span>
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}

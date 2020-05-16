@@ -13,12 +13,8 @@ export type UserType = {
 };
 
 export type PrivacyType = {
-  updates: {updateInfo: string, updateAgree: boolean },
-  products: {productsInfo: string, productsAgree: boolean },
-};
-
-export type DoneType = {
-  message: string;
+  updates: boolean,
+  products: boolean,
 };
 
 type PageType = 'User' | 'Privacy' | 'Done';
@@ -29,7 +25,7 @@ type State = {
   pages: {
     User: {component: any, data: UserType},
     Privacy: {component: any, data: PrivacyType},
-    Done: {component: any, data: DoneType},
+    Done: {component: any},
   },
 };
 
@@ -54,25 +50,39 @@ export default class App extends Component<{}, State> {
     const allPages = Object.keys(pages);
     const lengthPages = allPages.length;
 
-    if (allPages.includes(currentPage)
-      && currentPage !== allPages[lengthPages - 1]
-    ) {
-      const pageValues:any = pages[currentPage];
-      pageValues.data = values;
+    if (allPages.includes(currentPage)) {
+      if (currentPage !== allPages[lengthPages - 1]) {
+        const pageValues:any = pages[currentPage];
+        pageValues.data = values;
 
-      const nextPage = allPages[allPages.indexOf(currentPage) + 1];
+        const nextPage = allPages[allPages.indexOf(currentPage) + 1];
 
-      this.setState({
-        pages: {
-          ...pages,
-          [currentPage]: pageValues,
-        },
-        currentPage: nextPage,
-        validatedPages: [
-          ...validatedPages,
-          currentPage,
-        ],
-      });
+        this.setState({
+          pages: {
+            ...pages,
+            [currentPage]: pageValues,
+          },
+          currentPage: nextPage,
+          validatedPages: [
+            ...validatedPages,
+            currentPage,
+          ],
+        });
+      } else {
+        /* eslint-disable no-console */
+        console.log('USER DETAILS');
+        console.log(pages.User.data);
+        console.log('PRIVACY - COMMUNICATION PREFERENCES ');
+        console.log(pages.Privacy.data);
+        /* eslint-enable no-console */
+
+        this.setState({
+          validatedPages: [
+            ...validatedPages,
+            currentPage,
+          ],
+        });
+      }
     }
   }
 
