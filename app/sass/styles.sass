@@ -24,7 +24,7 @@ $input-error: #f00
 
 .form
   > div
-    margin-bottom: 15px
+    margin-bottom: 10px
 
   > div > input
     border: 0
@@ -32,6 +32,15 @@ $input-error: #f00
     display: inline-block
     font-size: 100%
     margin-left: 1em
+    vertical-align: bottom
 
     &.input-error
       border-bottom: 1px solid $input-error
+
+  .is-required
+    color: $input-error
+    font-size: 90%
+
+  .error-text
+    color: $input-error
+    font-size: 60%

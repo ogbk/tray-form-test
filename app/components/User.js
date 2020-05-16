@@ -76,7 +76,7 @@ export default class User extends Component<{}, State> {
         name, role, email, password,
       },
       errors: {
-        name: nameError, email: emailError, password: pwError,
+        name: nameError, email: emailError, password: passwordError,
       },
     } = this.state;
 
@@ -84,29 +84,44 @@ export default class User extends Component<{}, State> {
       <form className="form" onSubmit={this.handleSubmit}>
         <div>
           <span>name: </span>
+          <span className="is-required">*</span>
           <input
             type="text" name="name" value={name} onChange={this.handleInputChange}
             className={nameError ? 'input-error' : ''}
           />
+          <br />
+          <span className="error-text">{ nameError }&nbsp;</span>
         </div>
+
         <div>
           <span>role: </span>
           <input type="text" name="role" value={role} onChange={this.handleInputChange} />
+          <br />
+          <span className="error-text">&nbsp;</span>
         </div>
+
         <div>
           <span>email: </span>
+          <span className="is-required">*</span>
           <input
             type="text" name="email" value={email} onChange={this.handleInputChange}
             className={emailError ? 'input-error' : ''}
           />
+          <br />
+          <span className="error-text">{ emailError }&nbsp;</span>
         </div>
+
         <div>
           <span>password: </span>
+          <span className="is-required">*</span>
           <input
             type="password" name="password" value={password} onChange={this.handleInputChange}
-            className={pwError ? 'input-error' : ''}
+            className={passwordError ? 'input-error' : ''}
           />
+          <br />
+          <span className="error-text">{ passwordError }&nbsp;</span>
         </div>
+
         <input type="submit" value="Submit" />
       </form>
 
