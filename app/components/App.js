@@ -44,6 +44,38 @@ export default class App extends Component<{}, State> {
     },
   };
 
+  receivePageValues = (values: any): void => {
+    const {
+      currentPage,
+      validatedPages,
+      pages,
+    } = this.state;
+
+    const allPages = Object.keys(pages);
+    const lengthPages = allPages.length;
+
+    if (allPages.includes(currentPage)
+      && currentPage !== allPages[lengthPages - 1]
+    ) {
+      const pageValues:any = pages[currentPage];
+      pageValues.data = values;
+
+      const nextPage = allPages[allPages.indexOf(currentPage) + 1];
+
+      this.setState({
+        pages: {
+          ...pages,
+          [currentPage]: pageValues,
+        },
+        currentPage: nextPage,
+        validatedPages: [
+          ...validatedPages,
+          currentPage,
+        ],
+      });
+    }
+  }
+
   render() {
     const {
       currentPage,
@@ -70,12 +102,7 @@ export default class App extends Component<{}, State> {
           }
         </div>
 
-        <RenderCmp />
-
-        {/*
-          IF WE PERSIST & RESTORE SAVED PAGES ==> MOVE BACK & FORTH
-            <RenderCmp data={pages[currentPage].data} />
-        */}
+        <RenderCmp submitPage={this.receivePageValues} />
 
       </div>
     );

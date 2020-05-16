@@ -10,12 +10,16 @@ import type { UserType } from './App';
 
 const EMPTY_STRING = '';
 
+type Props = {
+  submitPage: (UserType) => void,
+};
+
 type State = {
   errors: UserType,
   values: UserType
 };
 
-export default class User extends Component<{}, State> {
+export default class User extends Component<Props, State> {
   state:State = (() => {
     const empty = {
       name: EMPTY_STRING,
@@ -31,9 +35,14 @@ export default class User extends Component<{}, State> {
   })();
 
   validatePage = () => {
-    const { errors } = this.state;
+    const { values, errors } = this.state;
+    const valuesList = Object.values(values);
     const errorsList = Object.values(errors);
-    return errorsList.every((thisError) => (thisError === EMPTY_STRING));
+
+    return (
+      errorsList.every((thisError) => (thisError === EMPTY_STRING))
+    && valuesList.every((thisValue) => (!!thisValue && thisValue !== EMPTY_STRING))
+    );
   };
 
   handleInputChange = ({ target: { name, value } }: any): void => {
@@ -68,6 +77,37 @@ export default class User extends Component<{}, State> {
         [name]: error,
       },
     });
+  }
+
+  handleSubmit = (evt: any) => {
+    evt.preventDefault();
+
+    const shouldSubmit = this.validatePage();
+
+    if (shouldSubmit) {
+      const { submitPage } = this.props;
+      const { values } = this.state;
+
+      submitPage(values);
+    } else {
+      const {
+        values: {
+          name, email, password,
+        },
+      } = this.state;
+      const nameError = validateName(name);
+      const emailError = validateEmail(email);
+      const passwordError = validatePassword(password);
+
+      this.setState({
+        errors: {
+          name: nameError,
+          email: emailError,
+          role: '',
+          password: passwordError,
+        },
+      });
+    }
   }
 
   render() {
