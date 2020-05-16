@@ -1,14 +1,14 @@
 // @flow
 
 import React, { Component } from 'react';
+import {
+  validateName,
+  validateEmail,
+  validatePassword,
+} from '../utils/validateFields';
 import type { UserType } from './App';
 
-/*
-type Props = {
-  data: UserType,
-  isValidated: boolean
-};
-*/
+const EMPTY_STRING = '';
 
 type State = {
   errors: UserType,
@@ -18,10 +18,10 @@ type State = {
 export default class User extends Component<{}, State> {
   state:State = (() => {
     const empty = {
-      name: '',
-      role: '',
-      email: '',
-      password: '',
+      name: EMPTY_STRING,
+      role: EMPTY_STRING,
+      email: EMPTY_STRING,
+      password: EMPTY_STRING,
     };
 
     return ({
@@ -30,31 +30,36 @@ export default class User extends Component<{}, State> {
     });
   })();
 
-
-  /* prepopulate persisted data */
-  /*
-  state:UserType = (() => {
-    const { isValidated, data } = this.props;
-
-    if (isValidated) {
-      return data;
-    }
-    return {
-      name: '',
-      role: '',
-      email: '',
-      password: '',
-    };
-  })();
-  */
-
   handleInputChange = ({ target: { name, value } }: any): void => {
-    const { values } = this.state;
+    const { values, errors } = this.state;
+
+    let error = EMPTY_STRING;
+
+    switch (name) {
+      case 'name':
+        error = validateName(value);
+        break;
+
+      case 'email':
+        error = validateEmail(value);
+        break;
+
+      case 'password':
+        error = validatePassword(value);
+        break;
+
+      default:
+        break;
+    }
 
     this.setState({
       values: {
         ...values,
         [name]: value,
+      },
+      errors: {
+        ...errors,
+        [name]: error,
       },
     });
   }
