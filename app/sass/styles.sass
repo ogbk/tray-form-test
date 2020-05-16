@@ -2,8 +2,8 @@
 // sass-lint:disable no-vendor-prefixes
 
 $selected-tab: #00f
-$border-input: #000099
 $validated-tab: #008000
+$input-error: #f00
 
 .main
   font-family: Arial, Comic Sans MS, Comic Sans, cursive
@@ -27,8 +27,11 @@ $validated-tab: #008000
     margin-bottom: 15px
 
   > div > input
-    border: none
+    border: 0
     border-bottom: 1px solid $selected-tab
     display: inline-block
     font-size: 100%
     margin-left: 1em
+
+    &.input-error
+      border-bottom: 1px solid $input-error

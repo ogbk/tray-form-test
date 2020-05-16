@@ -2,30 +2,33 @@
 
 const EMPTY_STRING = '';
 
-const validateName = (name: string): string => {
+const validateName = (_value: string): string => {
   let error = EMPTY_STRING;
+  const value = _value.trim();
 
-  if (!!name || name === EMPTY_STRING) {
+  if (!value || value === EMPTY_STRING) {
     error = 'Name is required';
   }
 
   return error;
 };
 
-const validateEmail = (email: string): string => {
+const validateEmail = (_value: string): string => {
   let error = EMPTY_STRING;
+  const value = _value.trim();
 
-  if (!!email || email === EMPTY_STRING) {
+  if (!value || value === EMPTY_STRING) {
     error = 'Email is required';
   }
 
   return error;
 };
 
-const validatePassword = (pw: string): string => {
+const validatePassword = (_value: string): string => {
   let error = EMPTY_STRING;
+  const value = _value.trim();
 
-  if (!!pw || pw === EMPTY_STRING) {
+  if (!value || value === EMPTY_STRING) {
     error = 'Password is required';
   }
 

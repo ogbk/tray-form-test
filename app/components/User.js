@@ -30,6 +30,12 @@ export default class User extends Component<{}, State> {
     });
   })();
 
+  validatePage = () => {
+    const { errors } = this.state;
+    const errorsList = Object.values(errors);
+    return errorsList.every((thisError) => (thisError === EMPTY_STRING));
+  };
+
   handleInputChange = ({ target: { name, value } }: any): void => {
     const { values, errors } = this.state;
 
@@ -69,13 +75,19 @@ export default class User extends Component<{}, State> {
       values: {
         name, role, email, password,
       },
+      errors: {
+        name: nameError, email: emailError, password: pwError,
+      },
     } = this.state;
 
     return (
       <form className="form" onSubmit={this.handleSubmit}>
         <div>
           <span>name: </span>
-          <input type="text" name="name" value={name} onChange={this.handleInputChange} />
+          <input
+            type="text" name="name" value={name} onChange={this.handleInputChange}
+            className={nameError ? 'input-error' : ''}
+          />
         </div>
         <div>
           <span>role: </span>
@@ -83,11 +95,17 @@ export default class User extends Component<{}, State> {
         </div>
         <div>
           <span>email: </span>
-          <input type="text" name="email" value={email} onChange={this.handleInputChange} />
+          <input
+            type="text" name="email" value={email} onChange={this.handleInputChange}
+            className={emailError ? 'input-error' : ''}
+          />
         </div>
         <div>
           <span>password: </span>
-          <input type="password" name="password" value={password} onChange={this.handleInputChange} />
+          <input
+            type="password" name="password" value={password} onChange={this.handleInputChange}
+            className={pwError ? 'input-error' : ''}
+          />
         </div>
         <input type="submit" value="Submit" />
       </form>
