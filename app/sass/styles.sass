@@ -2,6 +2,7 @@
 // sass-lint:disable no-vendor-prefixes
 
 $selected-tab: #00f
+$border-input: #000099
 $validated-tab: #008000
 
 .main
@@ -10,7 +11,7 @@ $validated-tab: #008000
   margin: 30px
 
 .page-tab
-  margin-bottom: 20px
+  margin-bottom: 25px
 
   span
     margin-right: 30px
@@ -20,3 +21,14 @@ $validated-tab: #008000
 
   .validated
     color: $validated-tab
+
+.form
+  > div
+    margin-bottom: 15px
+
+  > div > input
+    border: none
+    border-bottom: 1px solid $selected-tab
+    display: inline-block
+    font-size: 100%
+    margin-left: 1em

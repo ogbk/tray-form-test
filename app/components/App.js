@@ -70,7 +70,12 @@ export default class App extends Component<{}, State> {
           }
         </div>
 
-        <RenderCmp data={pages[currentPage].data} />
+        <RenderCmp />
+
+        {/*
+          IF WE PERSIST & RESTORE SAVED PAGES ==> MOVE BACK & FORTH
+            <RenderCmp data={pages[currentPage].data} />
+        */}
 
       </div>
     );
