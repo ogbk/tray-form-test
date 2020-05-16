@@ -46,10 +46,20 @@ const validateEmail = (_value: string): string => {
 };
 
 const validatePassword = (_value: string): string => {
-  const value = _value.trim();
+  const valueStr = _value.trim();
 
-  if (!value || value === EMPTY_STRING) {
+  if (!valueStr || valueStr === EMPTY_STRING) {
     return ('Password is required');
+  }
+
+  const valueArr = valueStr.split('');
+
+  if (valueStr.length < 10
+    || !valueArr.some((v) => ('0'.charCodeAt(0) <= v.charCodeAt(0) && v.charCodeAt(0) <= '9'.charCodeAt(0)))
+    || !valueArr.some((v) => ('a'.charCodeAt(0) <= v.charCodeAt(0) && v.charCodeAt(0) <= 'z'.charCodeAt(0)))
+    || !valueArr.some((v) => ('A'.charCodeAt(0) <= v.charCodeAt(0) && v.charCodeAt(0) <= 'Z'.charCodeAt(0)))
+  ) {
+    return ('Password is not valid. It must contain 10 or more chars, 1 number, 1 upper case and 1 lowercase');
   }
 
   return EMPTY_STRING;
