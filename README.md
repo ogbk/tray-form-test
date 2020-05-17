@@ -6,6 +6,7 @@
 - Flow - static typechecking tool
 - Sass - css preprocessor
 - Eslint - code linter
+- Jest & Enzyme - React testing tools
 
 I did not use the following:
 - Redux - the state management was fairly simple, no need for Redux
@@ -88,6 +89,6 @@ The only prop they receive is the function `submitPage()`, which takes as argume
 - Start flow server `npm run flow start`
 - Run flow `npm run flow status`
 
-## Testing with jest
+## Testing with jest & enzyme
 
 - test: `npm run test`
