@@ -30,6 +30,10 @@ describe('<App/>', () => {
   });
   
   test('on initial render, show only first page => <User/>', () => {
+    expect (tabs.at(0).hasClass('selected')).toEqual(true);
+    expect (tabs.at(1).hasClass('selected')).toEqual(false);
+    expect (tabs.at(2).hasClass('selected')).toEqual(false);
+    
     expect (app.containsMatchingElement(<User />)).toEqual(true);
     expect (app.containsMatchingElement(<Privacy />)).toEqual(false);
     expect (app.containsMatchingElement(<Done />)).toEqual(false);
