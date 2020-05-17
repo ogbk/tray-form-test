@@ -10,7 +10,7 @@
 
 I did not use the following:
 - Redux - the state management was fairly simple, no need for Redux
-- Redux Router - the app did not include many or complex routes, just 3 components to show
+- React Router - the app did not include many or complex routes, just 3 components to show
 
 ## App structure
 
