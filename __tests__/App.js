@@ -29,7 +29,7 @@ describe('<App/>', () => {
     expect (tabs.at(2).text()).toEqual('Done');
   });
   
-  test('on initial render, show first page => <User/>', () => {
+  test('on initial render, show only first page => <User/>', () => {
     expect (app.containsMatchingElement(<User />)).toEqual(true);
     expect (app.containsMatchingElement(<Privacy />)).toEqual(false);
     expect (app.containsMatchingElement(<Done />)).toEqual(false);
