@@ -11,17 +11,15 @@ import Done from '../app/components/Done';
 configure({ adapter: new Adapter() });
 
 let app;
-let tabs;
 
 beforeAll(() => {
   app = mount(<App />);
-  tabs = app.find('.page-tab > span');
 });
 
 describe('FULL JOURNEY WITH VALID INPUT FIELDS', () => {
 
   test('on render -> no page is validated', () => {
-    tabs = app.find('.page-tab > span');
+    let tabs = app.find('.page-tab > span');
 
     expect (tabs.at(0).hasClass('validated')).toEqual(false);
     expect (tabs.at(1).hasClass('validated')).toEqual(false);
