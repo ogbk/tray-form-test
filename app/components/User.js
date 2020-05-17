@@ -123,8 +123,10 @@ export default class User extends Component<Props, State> {
     return (
       <form className="form" onSubmit={this.handleSubmit}>
         <div>
-          <span>name: </span>
-          <span className="is-required">*</span>
+          <div className="input-label">
+            <span>name: </span>
+            <span className="is-required">*</span>
+          </div>
           <input
             type="text" name="name" value={name} onChange={this.handleInputChange}
             className={nameError ? 'input-error' : ''}
@@ -134,15 +136,19 @@ export default class User extends Component<Props, State> {
         </div>
 
         <div>
-          <span>role: </span>
+          <div className="input-label">
+            <span>role: </span>
+          </div>
           <input type="text" name="role" value={role} onChange={this.handleInputChange} />
           <br />
           <span className="error-text">&nbsp;</span>
         </div>
 
         <div>
-          <span>email: </span>
-          <span className="is-required">*</span>
+          <div className="input-label">
+            <span>email: </span>
+            <span className="is-required">*</span>
+          </div>
           <input
             type="text" name="email" value={email} onChange={this.handleInputChange}
             className={emailError ? 'input-error' : ''}
@@ -152,8 +158,10 @@ export default class User extends Component<Props, State> {
         </div>
 
         <div>
-          <span>password: </span>
-          <span className="is-required">*</span>
+          <div className="input-label">
+            <span>password: </span>
+            <span className="is-required">*</span>
+          </div>
           <input
             type="password" name="password" value={password} onChange={this.handleInputChange}
             className={passwordError ? 'input-error' : ''}
