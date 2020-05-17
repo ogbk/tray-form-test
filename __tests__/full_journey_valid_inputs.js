@@ -53,7 +53,7 @@ describe('FULL JOURNEY WITH VALID INPUT FIELDS', () => {
     expect (tabs_UserOk.at(2).hasClass('selected')).toEqual(false);
 
     // Select only products [checkbox 2] on Privacy
-    app.find('input[name="products"]').simulate('click', { target: { name: 'products', checked: true } });
+    app.find('input[name="products"]').simulate('change', { target: { name: 'products', checked: true } });
 
     // simulate Privacy submit
     let privacyFormValues = app.find(Privacy).state(); 
@@ -81,7 +81,10 @@ describe('FULL JOURNEY WITH VALID INPUT FIELDS', () => {
       email: 'john@gmail.com',
       password: '12345678pW'
     });
-    expect (privacyFormValues).toEqual({ updates: false, products: false });
+    expect (privacyFormValues).toEqual({ 
+      updates: false,
+      products: true
+    });
 
     expect (app.state('pages')['User']['data']).toEqual(userFormValues);
     expect (app.state('pages')['Privacy']['data']).toEqual(privacyFormValues);
