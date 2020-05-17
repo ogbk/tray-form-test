@@ -53,7 +53,7 @@ The only prop they receive is the function `submitPage()`, which takes as argume
 - GOING BACK TO A PAGE:
 
   - In `<App/>`
-    - make the `<span/>` elements inside `div.page-tab` clickable
+    - make the `<span/>` elements inside `div.page-tab` clickable -> add an `onClick()` function
     - when you click on `div.page-tab > span`move to the selected corresponding Page
     - can only move back if current page has been validated - enforce page validation before switching
     - can only switch back to a previously validated page, not to next pages, to move forward use the submit button
