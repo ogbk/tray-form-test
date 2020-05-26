@@ -5,6 +5,7 @@ import {
   validateName,
   validateEmail,
   validatePassword,
+  validatePage,
 } from '../utils/validateFields';
 import type { UserType } from './App';
 
@@ -33,20 +34,6 @@ export default class User extends Component<Props, State> {
       values: { ...empty },
     });
   })();
-
-  validatePage = () => {
-    const {
-      errors,
-      values: { name, email, password },
-    } = this.state;
-    const valuesList = [name, email, password];
-    const errorsList = Object.values(errors);
-
-    return (
-      errorsList.every((thisError) => (thisError === EMPTY_STRING))
-    && valuesList.every((thisValue) => (!!thisValue && thisValue !== EMPTY_STRING))
-    );
-  };
 
   handleInputChange = ({ target: { name, value } }: any): void => {
     const { values, errors } = this.state;
@@ -85,19 +72,16 @@ export default class User extends Component<Props, State> {
   handleSubmit = (evt: any) => {
     evt.preventDefault();
 
-    const shouldSubmit = this.validatePage();
+    const { errors, values } = this.state;
+    const shouldSubmit = validatePage(errors, values);
 
     if (shouldSubmit) {
       const { submitPage } = this.props;
-      const { values } = this.state;
-
       submitPage(values);
     } else {
       const {
-        values: {
-          name, email, password,
-        },
-      } = this.state;
+        name, email, password,
+      } = values;
       const nameError = validateName(name);
       const emailError = validateEmail(email);
       const passwordError = validatePassword(password);

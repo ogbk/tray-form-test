@@ -1,5 +1,7 @@
 // @flow
 
+import type { UserType } from '../components/App';
+
 const EMPTY_STRING = '';
 
 const validateName = (_value: string): string => {
@@ -65,4 +67,17 @@ const validatePassword = (_value: string): string => {
   return EMPTY_STRING;
 };
 
-export { validateName, validateEmail, validatePassword };
+const validatePage = (errors: UserType, values: UserType) => {
+  const { name, email, password } = values;
+  const valuesList = [name, email, password];
+  const errorsList = Object.values(errors);
+
+  return (
+    errorsList.every((thisError) => (thisError === EMPTY_STRING))
+  && valuesList.every((thisValue) => (!!thisValue && thisValue !== EMPTY_STRING))
+  );
+};
+
+export {
+  validateName, validateEmail, validatePassword, validatePage,
+};
