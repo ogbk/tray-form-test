@@ -35,8 +35,11 @@ export default class User extends Component<Props, State> {
   })();
 
   validatePage = () => {
-    const { values, errors } = this.state;
-    const valuesList = Object.values(values);
+    const {
+      errors,
+      values: { name, email, password },
+    } = this.state;
+    const valuesList = [name, email, password];
     const errorsList = Object.values(errors);
 
     return (
