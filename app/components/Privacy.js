@@ -34,12 +34,12 @@ export default class User extends Component<Props, PrivacyType> {
       <form className="form" onSubmit={this.handleSubmit}>
         <div>
           <input type="checkbox" name="updates" value={updates} onChange={this.handleInputChange} />
-          <span>Receive updates about Tray.io product by email </span>
+          <span>Receive updates about our products by email </span>
         </div>
 
         <div>
           <input type="checkbox" name="products" value={products} onChange={this.handleInputChange} />
-          <span>Receive communication by email for other products created by the Tray.io team</span>
+          <span>Receive communication by email for other products created by the team</span>
         </div>
         <input type="submit" value="Submit" />
       </form>
