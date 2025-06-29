@@ -1,5 +1,3 @@
-// @flow
-
 import type { UserType } from '../components/App';
 
 const EMPTY_STRING = '';

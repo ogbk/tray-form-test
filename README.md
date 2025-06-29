@@ -3,7 +3,6 @@
 ## Tech stack
 
 - React
-- Flow - static typechecking tool
 - Sass - css preprocessor
 - Eslint - code linter
 - Jest & Enzyme - React testing tools
@@ -82,12 +81,6 @@ The only prop they receive is the function `submitPage()`, which takes as argume
 - ESLint `npm run eslint`
 - Sass lint `npm run sass-lint`
 
-
-## Static typechecking with Flow
-
-- Stop flow server `npm run flow stop`
-- Start flow server `npm run flow start`
-- Run flow `npm run flow status`
 
 ## Testing with jest & enzyme
 
