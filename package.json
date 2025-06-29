@@ -2,7 +2,7 @@
   "name": "form-submission",
   "version": "1.0.0",
   "description": "User form submission",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "dev": "webpack-dev-server --hot --open",
     "serve": "webpack serve --open",

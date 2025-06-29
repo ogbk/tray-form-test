@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import type { PrivacyType } from './App';
+import type { PrivacyType } from './App.tsx';
 
 type Props = {
   submitPage: (PrivacyType) => void,

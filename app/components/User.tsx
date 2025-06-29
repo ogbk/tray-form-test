@@ -4,8 +4,8 @@ import {
   validateEmail,
   validatePassword,
   validatePage,
-} from '../utils/validateFields';
-import type { UserType } from './App';
+} from '../utils/validateFields.ts';
+import type { UserType } from './App.tsx';
 
 const EMPTY_STRING = '';
 

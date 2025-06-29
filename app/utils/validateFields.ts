@@ -1,4 +1,4 @@
-import type { UserType } from '../components/App';
+import type { UserType } from '../components/App.tsx';
 
 const EMPTY_STRING = '';
 

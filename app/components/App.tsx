@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import User from './User';
-import Privacy from './Privacy';
-import Done from './Done';
+import User from './User.tsx';
+import Privacy from './Privacy.tsx';
+import Done from './Done.tsx';
 
 export type UserType = {
   name: string,
