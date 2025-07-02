@@ -67,13 +67,11 @@ export default class App extends Component<{}, State> {
           ],
         });
       } else {
-        /* eslint-disable no-console */
         console.log('USER DETAILS');
         console.log(pages.User.data);
         console.log('PRIVACY - COMMUNICATION PREFERENCES ');
         console.log(pages.Privacy.data);
-        /* eslint-enable no-console */
-
+        
         this.setState({
           validatedPages: [
             ...validatedPages,
