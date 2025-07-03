@@ -5,7 +5,7 @@
 - React
 - Sass - css preprocessor
 - Eslint - code linter
-- Jest & Enzyme - React testing tools
+- Jest - Testing tool
 
 I did not use the following:
 - Redux - the state management was fairly simple, no need for Redux
